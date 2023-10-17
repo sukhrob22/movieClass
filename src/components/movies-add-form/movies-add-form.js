@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import './movies-add-form.css';
 
@@ -6,8 +7,8 @@ class MoviesAddForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '+998(90)-',
-            views: '',
+            name: '',
+            viewers: '',
         };
     }
 
@@ -17,12 +18,29 @@ class MoviesAddForm extends Component {
         });
     };
 
+    addFormHandler = (e) => {
+        e.preventDefault();
+        this.props.addForm({
+            name: this.state.name,
+            viewers: this.state.viewers,
+            id: uuidv4(),
+        });
+        this.setState({
+            name: '',
+            viewers: '',
+        });
+    };
+
     render() {
-        const { name, views } = this.state;
+        const { name, viewers } = this.state;
+        // const { addForm } = this.props;
         return (
             <div className='movies-add-form'>
                 <h3>Yangi kino qo'shish</h3>
-                <form className='add-form  d-flex'>
+                <form
+                    className='add-form   d-flex'
+                    onSubmit={this.addFormHandler}
+                >
                     <input
                         type='text'
                         className='form-control new-post-label'
@@ -36,8 +54,8 @@ class MoviesAddForm extends Component {
                         className='form-control new-post-label'
                         placeholder="Nechi marotaba ko'rilgan"
                         onChange={this.changeHandlerInput}
-                        name='views'
-                        value={views}
+                        name='viewers'
+                        value={viewers}
                     />
                     <button type='submit' className='btn btn-outline-dark'>
                         Qo'shish

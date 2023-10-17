@@ -27,13 +27,19 @@ class App extends Component {
 
     onDelete = (id) => {
         this.setState(({ data }) => {
-            const index = data.findIndex((c) => c.id === id);
-            console.log(index);
+            // const index = data.findIndex((c) => c.id === id);
+            // data.splice(index, 1); // mutable way
 
             return {
-                data,
+                data: data.filter((c) => c.id !== id),
             };
         });
+    };
+
+    addForm = (item) => {
+        this.setState(({ data }) => ({
+            data: [...data, item],
+        }));
     };
 
     render() {
@@ -47,7 +53,7 @@ class App extends Component {
                         <AppFilter />
                     </div>
                     <MovieList data={data} onDelete={this.onDelete} />
-                    <MoviesAddForm />
+                    <MoviesAddForm addForm={this.addForm} />
                 </div>
             </div>
         );
