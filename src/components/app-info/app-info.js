@@ -1,10 +1,14 @@
-import './app-info.css';
+import './app-info.scss';
 
-const AppInfo = () => {
+const AppInfo = ({ allMoviesLength, favouriteMovieCount }) => {
     return (
         <div className='app-info'>
-            <p className='fs-3 text-uppercase'>Barcha kinolar soni:</p>
-            <p className='fs-4 text-uppercase'>ko'rilgan kinolar soni:</p>
+            <p className='fs-3 text-uppercase'>
+                Barcha kinolar soni: {allMoviesLength}
+            </p>
+            <p className='fs-4 text-uppercase'>
+                ko'rilgan kinolar soni: {favouriteMovieCount}{' '}
+            </p>
         </div>
     );
 };
